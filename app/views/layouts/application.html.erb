@@ -7,22 +7,19 @@
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap", media: "all" %>
 
     <%= yield :head %>
 
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="icon" href="<%= asset_path('logo.png') %>" type="image/png">
 
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
   <body>
+  <%= render 'layouts/header' %>
     <main class="container mx-auto mt-28 px-5 flex">
-      <h1 class="text-3xl font-bold">
-  Hello world!
-</h1>
       <%= yield %>
     </main>
   </body>
