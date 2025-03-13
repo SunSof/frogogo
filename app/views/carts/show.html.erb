@@ -12,18 +12,17 @@
             <div class="ml-4">
               <p class="text-sm text-gray-500">картинка</p>
               <h3 class="font-semibold text-lg"><%= cart_item.product.name %></h3>
-              <p class="text-sm text-gray-500">кнопочка</p>
-              <p class="text-sm text-gray-500"><%= cart_item.product.price %></p>
+              <%= render 'carts/buttons' %>
+              <p class="text-sm text-gray-500"><%= cart_item.subtotal %></p>
             </div>
           </div>
-          <p class="font-semibold text-lg"><%= 1234 %></p>
         </div>
       <% end %>
     </div>
 
     <div class="mt-6 flex justify-between items-center">
       <p class="text-lg font-semibold">Сумма заказа</p>
-      <p class="text-lg font-semibold">1234</p>
+      <p class="text-lg font-semibold"><%= current_cart.total %></p>
     </div>
   </div> 
 <% else %>

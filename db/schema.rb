@@ -17,11 +17,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_13_173608) do
 
   create_table "cart_items", force: :cascade do |t|
     t.integer "quantity", default: 1
-    t.decimal "price", precision: 10, scale: 2
     t.uuid "cart_id"
     t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["cart_id", "product_id"], name: "index_cart_items_on_cart_id_and_product_id", unique: true
     t.index ["cart_id"], name: "index_cart_items_on_cart_id"
     t.index ["product_id"], name: "index_cart_items_on_product_id"
   end
