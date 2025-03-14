@@ -1,5 +1,5 @@
 class Cart < ApplicationRecord
-  has_many :cart_items 
+  has_many :cart_items, dependent: :destroy
   has_many :products, through: :cart_items
   
   enum :status, {
@@ -10,12 +10,26 @@ class Cart < ApplicationRecord
   }, default: :pending
 
   def self.current(session)
-    @current_cart ||= find_or_create_by(id: session[:cart_id])
-    session[:cart_id] ||= @current_cart.id
-    @current_cart
+    cart_id = session[:cart_id]
+    cart = cart_id ? find_by(id: cart_id) : nil
+    
+    if cart.nil?
+      cart = create
+      session[:cart_id] = cart.id
+    end
+    
+    cart
   end
 
   def total
-    cart_items.sum { |item| item.subtotal }
+    cart_items.includes(:product).sum { |item| item.subtotal || 0 }
+  end
+
+  def empty?
+    cart_items.empty?
+  end
+  
+  def clear!
+    cart_items.destroy_all
   end
 end

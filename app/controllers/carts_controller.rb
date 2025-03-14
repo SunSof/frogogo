@@ -1,11 +1,11 @@
 class CartsController < ApplicationController
   
-  def show 
+  def show
     @cart_items = current_cart.cart_items.includes(product: { image_attachment: :blob })
-  end 
+  end
 
   def clear
-    current_cart.cart_items.destroy_all
+    current_cart.clear!
     redirect_to cart_path
   end
 end

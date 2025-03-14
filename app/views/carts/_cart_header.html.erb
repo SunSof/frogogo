@@ -1,0 +1,11 @@
+<div id="cart_header" class="flex justify-between mb-6">
+  <h1 class="text-2xl font-medium text-black-800 flex-grow">Корзина</h1>
+  <% unless current_cart.empty? %>
+    <%= button_to clear_cart_path(current_cart), 
+                method: :delete,
+                data: { confirm: "Вы уверены, что хотите очистить корзину?" },
+                class: "text-gray-500" do %>
+      Очистить корзину
+    <% end %>
+  <% end %>
+</div>

@@ -1,24 +1,48 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Frogogo
 
-Things you may want to cover:
+This README provides the necessary steps to get your application up and running.
 
-* Ruby version
+## Versions
 
-* System dependencies
+- Ruby: 3.3.0
+- Rails: 8.0.2
 
-* Configuration
+## System Dependencies
 
-* Database creation
+Ensure you have the following installed:
 
-* Database initialization
+- Ruby 3.3.0
+- Rails 8.0.2
+- PostgreSQL 
 
-* How to run the test suite
+## Configuration
+  ```bash
+    bundle install
+  ```
+## Database Setup
 
-* Services (job queues, cache servers, search engines, etc.)
+To set up the database, run the following commands:
 
-* Deployment instructions
+1. Create the database:
+    ```bash
+    rails db:create
+    ```
 
-* ...
+2. Run migrations:
+    ```bash
+    rails db:migrate
+    ```
+
+3. Seed the database:
+    ```bash
+    rails db:seed
+    ```
+## Running the Application
+
+To start the application locally, run:
+
+```bash
+./bin/dev
+```
