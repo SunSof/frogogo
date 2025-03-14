@@ -1,4 +1,4 @@
 <div class="mt-6 px-4 py-6 flex justify-between items-center border border-gray-200 rounded-lg" id="cart_summary">
   <p class="text-lg font-medium">Сумма заказа</p>
-  <p class="text-xl font-semibold"><%= current_cart.total %></p>
+  <p class="text-xl font-semibold"><%= number_to_currency(current_cart.total, precision: 0, unit: '₽', format: '%n %u') %></p>
 </div>

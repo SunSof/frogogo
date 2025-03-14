@@ -13,6 +13,6 @@
       form: { data: { turbo_confirm: "Вы уверены, что хотите удалить продукты из корзины?", turbo_method: :delete } } do %>
       <%= image_tag "trash.png", class: "h-5 w-auto object-contain", alt: "Trash" %>
     <% end %>
-    <p class="absolute top-1/2 right-0 -translate-y-1/2 text-sm text-gray-500"><%= cart_item.subtotal %></p>
+    <p class="absolute top-1/2 right-0 -translate-y-1/2 text-sm text-gray-500"><%= number_to_currency(cart_item.subtotal, precision: 0, unit: '₽', format: '%n %u') %></p>
   </div>
 </div>
