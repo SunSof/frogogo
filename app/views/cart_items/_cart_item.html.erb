@@ -1,0 +1,11 @@
+<div id="cart_item_<%= cart_item.id %>" class="flex items-center justify-between border-b pb-4">
+  <div class="flex items-center">
+    <div class="ml-4">
+      <p class="text-sm text-gray-500">картинка</p>
+      <h3 class="font-semibold text-lg"><%= cart_item.product.name %></h3>
+      <%= render 'cart_items/buttons', cart_item: cart_item %>
+      <p class="text-sm text-gray-500">мусорка</p>
+      <p class="text-sm text-gray-500"><%= cart_item.subtotal %></p>
+    </div>
+  </div>
+</div>
