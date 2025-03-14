@@ -2,10 +2,10 @@
   <div class="w-3/5 mx-auto pt-4">
     <div class="flex justify-between mb-6">
       <h1 class="text-2xl font-medium text-black-800 flex-grow">Корзина</h1>
-      <%= button_to clear_cart_path(@cart), 
+      <%= button_to clear_cart_path(current_cart), 
               method: :delete,
               data: { confirm: "Вы уверены, что хотите очистить корзину?" },
-              class: "text-gray-500 hover:text-gray-700" do %>
+              class: "text-gray-500" do %>
         Очистить корзину
       <% end %>
     </div>
@@ -15,7 +15,13 @@
       <% end %>
     </div>
     <%= render 'carts/summary' %>
+    <div class="mt-5 bg-teal-400 text-white px-4 py-2 rounded-lg text-center">
+      <button>Оформить</button>
+    </div>
   </div>
+  
 <% else %>
-  <%= render 'carts/empty_cart' %>
+  <div class="container mx-auto items-center mb-6 h-screen">
+    <%= render 'carts/empty_cart' %>
+  </div>
 <% end %>

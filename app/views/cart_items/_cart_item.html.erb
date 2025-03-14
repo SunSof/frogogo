@@ -1,12 +1,12 @@
-<div id="cart_item_<%= cart_item.id %>" class="flex border-b py-4 min-h-24">
-  <p class="basis-1/4 text-sm text-gray-500">картинка</p>
-  <div class="basis-1/4 flex items-center justify-center">
+<div id="cart_item_<%= cart_item.id %>" class="flex border-b border-gray-200 py-4 min-h-24">
+  <%= image_tag cart_item.product.image, class: "h-16 w-auto mb-4" %>
+  <div class="basis-1/3 flex items-center justify-center">
     <h3 class="font-semibold text-lg"><%= cart_item.product.name %></h3>
   </div>
-  <div class="basis-1/4 flex items-center justify-center">
+  <div class="basis-1/3 flex items-center  justify-center">
     <%= render 'cart_items/buttons', cart_item: cart_item %>
   </div>
-  <div class="basis-1/4 relative">
+  <div class="basis-1/3 relative justify-center">
     <%= button_to cart_item_path(cart_item),
       class: "absolute top-0 right-0",
       method: :delete, 
