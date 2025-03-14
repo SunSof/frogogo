@@ -12,7 +12,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "welcome#index"
 
-  resource :cart, only: [:show]
+  resource :cart, only: [:show] do
+    delete :clear, on: :member
+  end
 
   resources :cart_items, only: [:update, :destroy]
 end

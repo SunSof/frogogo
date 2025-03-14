@@ -4,7 +4,11 @@
       <p class="text-sm text-gray-500">картинка</p>
       <h3 class="font-semibold text-lg"><%= cart_item.product.name %></h3>
       <%= render 'cart_items/buttons', cart_item: cart_item %>
-      <p class="text-sm text-gray-500">мусорка</p>
+      <%= button_to cart_item_path(cart_item), 
+      method: :delete, 
+      form: { data: { turbo_confirm: "Вы уверены, что хотите удалить продукты из корзины?", turbo_method: :delete } } do %>
+        <%= image_tag "trash.png", class: "h-5 w-auto object-contain", alt: "Trash" %>
+      <% end %>
       <p class="text-sm text-gray-500"><%= cart_item.subtotal %></p>
     </div>
   </div>

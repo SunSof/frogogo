@@ -18,8 +18,4 @@ class Cart < ApplicationRecord
   def total
     cart_items.sum { |item| item.subtotal }
   end
-
-  def remove_product(product)
-    cart_items.find_by(product_id: product.id)&.destroy
-  end
 end

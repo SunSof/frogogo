@@ -2,18 +2,20 @@
   <div class="max-w-lg mx-auto">
     <div class="flex justify-between mb-6">
       <h1 class="text-2xl font-medium text-black-800 flex-grow">Корзина</h1>
-      <button class="text-gray-500 hover:text-gray-700">Очистить корзину</button>
+      <%= button_to clear_cart_path(@cart), 
+              method: :delete,
+              data: { confirm: "Вы уверены, что хотите очистить корзину?" },
+              class: "text-gray-500 hover:text-gray-700" do %>
+        Очистить корзину
+      <% end %>
     </div>
     <div class="space-y-4" id="cart_items_container">
     <% @cart_items.each do |cart_item| %> 
       <%= render 'cart_items/cart_item', cart_item: cart_item %>
     <% end %>
     </div>
-    <div class="mt-6 flex justify-between items-center" id="cart_summary">
-      <p class="text-lg font-semibold">Сумма заказа</p>
-      <p class="text-lg font-semibold"><%= current_cart.total %></p>
-    </div>
+    <%= render 'carts/summary' %>
   </div> 
 <% else %>
-  <%= render 'cart/empty_cart' %>
+  <%= render 'carts/empty_cart' %>
 <% end %>
