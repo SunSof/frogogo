@@ -5,3 +5,16 @@ products = Product.create([
   { name: 'Keyboard', price: 79.99, description: 'Mechanical keyboard' },
   { name: 'Mouse', price: 29.99, description: 'Wireless mouse' }
 ])
+
+image_path = Rails.root.join('app/assets/images/prod.png')
+
+products.each do |product|
+  file = File.open(image_path)
+    
+  product.image.attach(
+    io: file,
+    filename: 'prod.png',
+    content_type: 'image/png'
+  )
+  file.close
+end
