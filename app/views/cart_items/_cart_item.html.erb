@@ -1,15 +1,18 @@
-<div id="cart_item_<%= cart_item.id %>" class="flex items-center justify-between border-b pb-4">
-  <div class="flex items-center">
-    <div class="ml-4">
-      <p class="text-sm text-gray-500">картинка</p>
-      <h3 class="font-semibold text-lg"><%= cart_item.product.name %></h3>
-      <%= render 'cart_items/buttons', cart_item: cart_item %>
-      <%= button_to cart_item_path(cart_item), 
+<div id="cart_item_<%= cart_item.id %>" class="flex border-b py-4 min-h-24">
+  <p class="basis-1/4 text-sm text-gray-500">картинка</p>
+  <div class="basis-1/4 flex items-center justify-center">
+    <h3 class="font-semibold text-lg"><%= cart_item.product.name %></h3>
+  </div>
+  <div class="basis-1/4 flex items-center justify-center">
+    <%= render 'cart_items/buttons', cart_item: cart_item %>
+  </div>
+  <div class="basis-1/4 relative">
+    <%= button_to cart_item_path(cart_item),
+      class: "absolute top-0 right-0",
       method: :delete, 
       form: { data: { turbo_confirm: "Вы уверены, что хотите удалить продукты из корзины?", turbo_method: :delete } } do %>
-        <%= image_tag "trash.png", class: "h-5 w-auto object-contain", alt: "Trash" %>
-      <% end %>
-      <p class="text-sm text-gray-500"><%= cart_item.subtotal %></p>
-    </div>
+      <%= image_tag "trash.png", class: "h-5 w-auto object-contain", alt: "Trash" %>
+    <% end %>
+    <p class="absolute top-1/2 right-0 -translate-y-1/2 text-sm text-gray-500"><%= cart_item.subtotal %></p>
   </div>
 </div>

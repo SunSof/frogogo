@@ -1,5 +1,5 @@
 <% if @cart_items.any? %>
-  <div class="max-w-lg mx-auto">
+  <div class="w-3/5 mx-auto pt-4">
     <div class="flex justify-between mb-6">
       <h1 class="text-2xl font-medium text-black-800 flex-grow">Корзина</h1>
       <%= button_to clear_cart_path(@cart), 
@@ -9,13 +9,13 @@
         Очистить корзину
       <% end %>
     </div>
-    <div class="space-y-4" id="cart_items_container">
-    <% @cart_items.each do |cart_item| %> 
-      <%= render 'cart_items/cart_item', cart_item: cart_item %>
-    <% end %>
+    <div id="cart_items_container">
+      <% @cart_items.each do |cart_item| %>
+        <%= render 'cart_items/cart_item', cart_item: cart_item %>
+      <% end %>
     </div>
     <%= render 'carts/summary' %>
-  </div> 
+  </div>
 <% else %>
   <%= render 'carts/empty_cart' %>
 <% end %>
