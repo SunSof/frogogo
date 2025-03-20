@@ -24,7 +24,8 @@ class CartItemsController < ApplicationController
       format.turbo_stream do
         render turbo_stream: [
           turbo_stream.replace("cart_item_#{@cart_item.id}", partial: "cart_items/cart_item", locals: { cart_item: @cart_item }),
-          turbo_stream.replace("cart_summary", partial: "carts/summary", locals: { cart: @cart })
+          turbo_stream.replace("cart_summary", partial: "carts/summary", locals: { cart: @cart }),
+          turbo_stream.replace("slider", partial: "carts/slider", locals: { cart: @cart })
         ]
       end
     end

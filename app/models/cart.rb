@@ -25,6 +25,15 @@ class Cart < ApplicationRecord
     cart_items.includes(:product).sum { |item| item.subtotal || 0 }
   end
 
+  def discounted_total(discount_amount = 0)
+    discount = discount_amount.to_i
+    total - discount
+  end
+
+  def items_count
+    cart_items.sum(:quantity)
+  end 
+
   def empty?
     cart_items.empty?
   end

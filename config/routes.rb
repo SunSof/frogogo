@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   root "home#index"
 
   resource :cart, only: [:show] do
+    post :slider_discount, on: :member
     delete :clear, on: :member
   end
 
