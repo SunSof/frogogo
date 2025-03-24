@@ -1,5 +1,4 @@
 class CartsController < ApplicationController
-  before_action :set_discount_amount, only: [:show, :slider_discount]
 
   def show
     @cart_items = current_cart.cart_items.includes(product: { image_attachment: :blob })
@@ -10,28 +9,36 @@ class CartsController < ApplicationController
     redirect_to cart_path
   end
 
-  def slider_discount
-    @discount_amount = params[:discount_amount]
+  def update_discount
+    discount = params[:discount_amount].to_i
 
-    formatted_discount = helpers.number_to_currency(@discount_amount, precision: 0, unit: '₽', format: '%n %u')
+    if current_cart.update(discount: discount)
+      respond_with_success
+    else
+      respond_with_error("Неудалось обновить скидку.")
+    end
+  end
 
+  private 
+
+  def respond_with_success
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: [
-          turbo_stream.update("discount_value", html: formatted_discount),
+          turbo_stream.update("discount_value", 
+          html: helpers.number_to_currency(current_cart.discount, precision: 0, unit: '₽', format: '%n %u')),
           turbo_stream.replace("cart_summary", partial: "carts/summary", locals: { 
             cart: current_cart, 
-            discount_amount: @discount_amount 
+            discount_amount: current_cart.discount
           })
         ]
       end
     end
   end 
 
-  private
-  
-  def set_discount_amount
-    @discount_amount = session[:discount_amount] || 0
+  def respond_with_error(message)
+    respond_to do |format|
+      format.turbo_stream { flash.now[:alert] = message }
+    end
   end
-
 end

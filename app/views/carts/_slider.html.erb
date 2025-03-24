@@ -8,13 +8,15 @@
     </p>
     <p class="text-start text-gray-500 mb-2">Передвигая слайдер, укажите сумму скидки</p>
     <p id="discount_value" class="text-end text-teal-400">
-      <%= number_to_currency(@discount_amount, precision: 0, unit: '₽', format: '%n %u') %>
+      <%= number_to_currency(current_cart.discount, precision: 0, unit: '₽', format: '%n %u') %>
     </p>
   </div>
-  <%= form_with url: slider_discount_cart_path, method: :post, data: { turbo: true } do |f| %>
-    <input name="discount_amount" type="range" min="0" max="1000" value="0" step="100"
+  <%= form_with url:update_discount_cart_path, method: :post, data: { turbo: true } do |f| %>
+    <input name="discount_amount" type="range" min="0"
+    max="<%= [current_cart.total - 100, 1000].min %>"
+    value="<%= current_cart.discount %>" step="100"
     class="w-full mt-6 h-1 bg-teal-400 rounded-lg appearance-none cursor-pointer accent-teal-400"
-    oninput="this.form.requestSubmit()">
+    oninput="clearTimeout(this.timer); this.timer = setTimeout(() => this.form.requestSubmit(), 1000)">
   <% end %>
 </div>
 

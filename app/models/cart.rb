@@ -2,6 +2,8 @@ class Cart < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_many :products, through: :cart_items
   
+  validate :discount_limit
+
   enum :status, {
     pending: 0,
     processing: 1,
@@ -25,9 +27,9 @@ class Cart < ApplicationRecord
     cart_items.includes(:product).sum { |item| item.subtotal || 0 }
   end
 
-  def discounted_total(discount_amount = 0)
-    discount = discount_amount.to_i
-    total - discount
+  def discounted_total
+    max_discount = [discount, total - 100].min
+    [total - max_discount, 100].max
   end
 
   def items_count
@@ -40,5 +42,14 @@ class Cart < ApplicationRecord
   
   def clear!
     cart_items.destroy_all
+  end
+
+  private
+
+  def discount_limit
+    max_discount = total - 100
+    if discount > max_discount
+      errors.add(:discount, "Скидка не может быть больше, чем #{max_discount}")
+    end
   end
 end

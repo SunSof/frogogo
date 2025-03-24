@@ -7,7 +7,7 @@
       <% end %>
       <div class="mt-6 px-4 py-6 flex flex-col border border-gray-200 rounded-lg divide-y divide-gray-200">
         <%= render 'carts/slider' %>
-        <%= render 'carts/summary', locals: { cart: current_cart, discount_amount: @discount_amount } %>
+        <%= render 'carts/summary', locals: { cart: current_cart, discount_amount: current_cart.discount} %>
       </div>
       <div class="mt-5 bg-teal-400 text-white px-4 py-2 rounded-lg text-center">
         <%= button_to "Оформить", clear_cart_path, 
