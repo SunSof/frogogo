@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   root "home#index"
 
   resource :cart, only: [:show] do
-    post :update_discount, on: :member
+    patch :update_discount, on: :member
     delete :clear, on: :member
   end
 

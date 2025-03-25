@@ -11,7 +11,7 @@ class CartsController < ApplicationController
 
   def update_discount
     discount = params[:discount_amount].to_i
-
+  
     if current_cart.update(discount: discount)
       respond_with_success
     else
@@ -38,7 +38,10 @@ class CartsController < ApplicationController
 
   def respond_with_error(message)
     respond_to do |format|
-      format.turbo_stream { flash.now[:alert] = message }
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update("discount_form_messages", 
+          html: "<div class='text-red-500 mt-1'>#{message}</div>")
+      end
     end
   end
 end

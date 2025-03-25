@@ -53,7 +53,10 @@ class CartItemsController < ApplicationController
 
   def respond_with_error(message)
     respond_to do |format|
-      format.turbo_stream { flash.now[:alert] = message }
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update("quantity_error", 
+          html: "<div class='text-red-500 mt-1'>#{message}</div>")
+      end
     end
   end
 

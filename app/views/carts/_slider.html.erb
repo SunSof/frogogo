@@ -11,7 +11,7 @@
       <%= number_to_currency(current_cart.discount, precision: 0, unit: '₽', format: '%n %u') %>
     </p>
   </div>
-  <%= form_with url:update_discount_cart_path, method: :post, data: { turbo: true } do |f| %>
+  <%= form_with url:update_discount_cart_path, method: :patch, data: { turbo: true } do |f| %>
     <input name="discount_amount" type="range" min="0"
     max="<%= [current_cart.total - 100, 1000].min %>"
     value="<%= current_cart.discount %>" step="100"
