@@ -28,6 +28,8 @@ class Cart < ApplicationRecord
   end
 
   def discounted_total
+    return total if discount.zero?
+    # The final total cannot be lower than 100
     max_discount = [discount, total - 100].min
     [total - max_discount, 100].max
   end
