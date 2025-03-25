@@ -47,9 +47,12 @@ class Cart < ApplicationRecord
   private
 
   def discount_limit
+    return if total <= 100
+    
     max_discount = total - 100
-    if discount > max_discount
-      errors.add(:discount, "Скидка не может быть больше, чем #{max_discount}")
+
+    if discount > max_discount && max_discount > 0
+      errors.add(:discount, "Скидка не может быть больше, чем сумма заказа")
     end
   end
 end
